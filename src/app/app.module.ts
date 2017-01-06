@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { WorkersListComponent } from './workers-list/workers-list.component';
 import { WorkerService } from './worker.service';
 import { MaterialModule } from '@angular/material';
+import { Ng2SelectModule } from 'ng2-material-select';
 import 'hammerjs';
 
 
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     NgxDatatableModule ,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    Ng2SelectModule
   ],
   providers: [WorkerService],
   bootstrap: [AppComponent]

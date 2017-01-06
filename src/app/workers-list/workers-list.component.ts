@@ -87,12 +87,12 @@ export class WorkersListComponent implements OnInit {
     console.log(worker)
   }
 
-  updateFilter(event) {
-      let val = event.target.value.toLowerCase();
+  updateFilter(event, filter) {
+      let val = event.target.value;
 
       // filter our data
       let temp = this.temp.filter(function(d) {
-        return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+        return eval('d.'+ filter.toLowerCase() + '.indexOf(val) !== -1 || !val');
       });
 
       // update the rows

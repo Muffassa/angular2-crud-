@@ -9,15 +9,26 @@
 </md-input-container>
 
 <button md-raised-button color="primary" (click)="saveWorker(name, surname, patronymic)">Add</button>
+<div class="search">
+<div class="search__filter">
+  <ng2-select [placeholder]="'Choose your filter'"
+            [options]="['Name', 'Surname', 'Patronymic']"
+            [(ngModel)]="filter"
+            [style.margin-rigth]="10">
+
+  </ng2-select>
+</div>
+<md-input-container>
+  <input
+        md-input
+        type='text'
+        placeholder='Type to filter the {{filter}} column...'
+        (keyup)='updateFilter($event, filter)'
+      />
+</md-input-container>
+</div>
 <div>
-  <md-input-container>
-    <input
-          md-input
-          type='text'
-          placeholder='Type to filter the name column...'
-          (keyup)='updateFilter($event)'
-        />
-  </md-input-container>
+
   <ngx-datatable
     class="material "
     [rows]="workers"

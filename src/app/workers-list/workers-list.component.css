@@ -31,3 +31,12 @@
   top: 0;
   cursor: pointer;
 }
+
+.search {
+  display: flex;
+  flex-direction: row;
+}
+
+.search__filter {
+  margin-right: 10px;
+}
