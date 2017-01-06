@@ -8,6 +8,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
 import { WorkersListComponent } from './workers-list/workers-list.component';
+import { CrudService } from './crud.service';
 import { WorkerService } from './worker.service';
 import { MaterialModule } from '@angular/material';
 import { Ng2SelectModule } from 'ng2-material-select';
@@ -32,7 +33,10 @@ const appRoutes: Routes = [
     MaterialModule.forRoot(),
     Ng2SelectModule
   ],
-  providers: [WorkerService],
+  providers: [
+    CrudService,
+    WorkerService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

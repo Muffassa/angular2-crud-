@@ -19,15 +19,16 @@ export class WorkersListComponent implements OnInit {
   editableWorkerId: number;
   temp: any[];
 
+
   constructor(private workerService: WorkerService) {
-    this.workerService.getWorkers()
+   }
+
+  ngOnInit() {
+    this.workerService.getData()
                      .subscribe( workers => {
                        this.temp = [...workers];
                        this.workers = workers;
                      } );
-   }
-
-  ngOnInit() {
   }
 
   saveWorker(name: String, surname: String, patronymic: String) {
@@ -38,14 +39,14 @@ export class WorkersListComponent implements OnInit {
     }
 
 
-    this.workerService.saveWorker(worker)
+    this.workerService.save(worker)
       .subscribe(response => {
         this.workers.push(worker);
       });
   }
 
   deleteWorker(id) {
-    this.workerService.deleteWorker(id)
+    this.workerService.delete(id)
       .subscribe(response => {
         for(let i = 0; i < this.workers.length; i++) {
           if (this.workers[i].id === id) {
@@ -72,7 +73,7 @@ export class WorkersListComponent implements OnInit {
       patronymic: patronymic
     }
 
-    this.workerService.updateWorker(worker)
+    this.workerService.update(worker)
       .subscribe(response => {
         for(let i = 0; i < this.workers.length; i++) {
           if(worker.id === this.workers[i].id) {
@@ -84,7 +85,6 @@ export class WorkersListComponent implements OnInit {
       })
 
     this.toggleEditPopup();
-    console.log(worker)
   }
 
   updateFilter(event, filter) {
