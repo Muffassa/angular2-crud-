@@ -6,8 +6,6 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class WorkerService {
 
-  workers: Worker[];
-
   constructor(private http: Http) { }
 
   getWorkers(){
