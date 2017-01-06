@@ -18,7 +18,10 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.css",
+        "assets/font-awesome-4.7.0/css/font-awesome.min.css",
+        "../node_modules/@swimlane/ngx-datatable/release/material.css",
+        "../node_modules/@swimlane/ngx-datatable/release/datatable.css"
       ],
       "scripts": [],
       "environments": {

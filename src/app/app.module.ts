@@ -3,10 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 import { AppComponent } from './app.component';
 import { WorkersListComponent } from './workers-list/workers-list.component';
+import { WorkerService } from './worker.service';
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
+
 
 const appRoutes: Routes = [
   {path: 'workers', component: WorkersListComponent}
@@ -21,9 +26,11 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgxDatatableModule ,
+    MaterialModule.forRoot()
   ],
-  providers: [],
+  providers: [WorkerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
