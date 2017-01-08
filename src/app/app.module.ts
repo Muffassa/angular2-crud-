@@ -10,10 +10,12 @@ import { AppComponent } from './app.component';
 import { WorkersListComponent } from './workers-list/workers-list.component';
 import { CrudService } from './crud.service';
 import { WorkerService } from './worker.service';
+import { ClientService } from './client.service';
 import { MaterialModule } from '@angular/material';
 import { Ng2SelectModule } from 'ng2-material-select';
 import 'hammerjs';
 import { TableListComponent } from './table-list/table-list.component';
+import { ClientsComponent } from './clients/clients.component';
 
 
 const appRoutes: Routes = [
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     WorkersListComponent,
-    TableListComponent
+    TableListComponent,
+    ClientsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ const appRoutes: Routes = [
   providers: [
     CrudService,
     WorkerService,
+    ClientService
   ],
   bootstrap: [AppComponent]
 })
