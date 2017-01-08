@@ -20,6 +20,7 @@ import { ClientsComponent } from './clients/clients.component';
 
 const appRoutes: Routes = [
   {path: 'workers', component: WorkersListComponent}
+  {path: 'clients', component: ClientsComponent}
 ]
 
 @NgModule({
