@@ -16,8 +16,6 @@ export class WorkersListComponent implements OnInit {
     { name: 'Patronymic' }
   ];
   isShownEditPopup: boolean;
-  editableWorkerId: number;
-  temp: any[];
 
 
   constructor(private workerService: WorkerService) {
@@ -26,16 +24,15 @@ export class WorkersListComponent implements OnInit {
   ngOnInit() {
     this.workerService.getData()
                      .subscribe( workers => {
-                       this.temp = [...workers];
                        this.workers = workers;
                      } );
   }
 
-  saveWorker(name: String, surname: String, patronymic: String) {
+  saveWorker(workerData) {
     let worker: Worker = {
-      name: name,
-      surname: surname,
-      patronymic: patronymic
+      name: workerData[0],
+      surname: workerData[1],
+      patronymic: workerData[2]
     }
 
 
@@ -56,21 +53,12 @@ export class WorkersListComponent implements OnInit {
     });
   }
 
-  initEditableWorker(id) {
-    this.editableWorkerId = id;
-    this.toggleEditPopup();
-  }
-
-  toggleEditPopup() {
-    this.isShownEditPopup = !this.isShownEditPopup;
-  }
-
-  updateWorker(name: string, surname: string, patronymic: string) {
+  updateWorker(data) {
     let worker: Worker = {
-      id: this.editableWorkerId,
-      name: name,
-      surname: surname,
-      patronymic: patronymic
+      id: data[0],
+      name: data[1],
+      surname: data[2],
+      patronymic: data[3]
     }
 
     this.workerService.update(worker)
@@ -83,19 +71,7 @@ export class WorkersListComponent implements OnInit {
           }
         }
       })
-
-    this.toggleEditPopup();
   }
 
-  updateFilter(event, filter) {
-      let val = event.target.value;
 
-      // filter our data
-      let temp = this.temp.filter(function(d) {
-        return eval('d.'+ filter.toLowerCase() + '.indexOf(val) !== -1 || !val');
-      });
-
-      // update the rows
-      this.workers = temp;
-    }
 }

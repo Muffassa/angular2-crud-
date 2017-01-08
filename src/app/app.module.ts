@@ -13,6 +13,7 @@ import { WorkerService } from './worker.service';
 import { MaterialModule } from '@angular/material';
 import { Ng2SelectModule } from 'ng2-material-select';
 import 'hammerjs';
+import { TableListComponent } from './table-list/table-list.component';
 
 
 const appRoutes: Routes = [
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    WorkersListComponent
+    WorkersListComponent,
+    TableListComponent
   ],
   imports: [
     BrowserModule,

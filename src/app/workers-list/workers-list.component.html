@@ -1,4 +1,4 @@
-<md-input-container>
+<!-- <md-input-container>
   <input md-input placeholder="Name" [(ngModel)]="name">
 </md-input-container>
 <md-input-container>
@@ -78,4 +78,9 @@
     <i class="material-icons">done</i>
  </button>
  <i class="material-icons popup__button--close" (click)="toggleEditPopup()">close</i>
-</div>
+</div> -->
+<app-table-list [tableData]="workers"
+                (tableDataSaved)="saveWorker($event)"
+                (tableDataDeleted)="deleteWorker($event)"
+                (tableDataUpdated)="updateWorker($event)"
+                (tableDataChanged)="workers = $event"></app-table-list>

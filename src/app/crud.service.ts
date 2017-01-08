@@ -31,14 +31,14 @@ export class CrudService {
   }
 
   delete(id) {
-    return this.http.delete(this.URL + '' + id)
+    return this.http.delete(this.URL + '/' + id)
       .map(response => response.json);
   }
 
   update(data) {
     let header = new  Headers();
     header.append('Content-Type', 'application/json')
-    return this.http.patch(this.URL + '' + data.id ,
+    return this.http.patch(this.URL + '/' + data.id ,
         JSON.stringify(data), {headers: header});
   }
 }

@@ -1,0 +1,62 @@
+<div class="dataInput" *ngFor="let tableHeader of dataProps let i = index">
+  <md-input-container >
+    <input md-input placeholder="{{ tableHeader }}" [(ngModel)]="dataPropsValues[i]">
+  </md-input-container>
+</div>
+
+<button md-raised-button color="primary" (click)="saveData(dataPropsValues)">Add</button>
+
+<div class="search">
+<div class="search__filter">
+  <ng2-select [placeholder]="'Choose your filter'"
+            [options]="dataProps"
+            [(ngModel)]="filter"
+            [style.margin-rigth]="10">
+
+  </ng2-select>
+</div>
+<md-input-container>
+  <input
+        md-input
+        type='text'
+        placeholder='Type to filter the {{filter}} column...'
+        (keyup)='updateFilter($event, filter)'
+      />
+</md-input-container>
+</div>
+
+<div>
+  <ngx-datatable
+    class="material "
+    [rows]="tableData"
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="50">
+      <ngx-datatable-column *ngFor="let tableHeader of dataProps" name="{{ tableHeader }}">
+         <template let-value="value" ngx-datatable-cell-template>
+           {{ value }}
+         </template>
+       </ngx-datatable-column>
+       <ngx-datatable-column>
+         <template let-row="row" ngx-datatable-cell-template>
+           <button md-button (click)="newDataValues[0] = row.id; toggleEditPopup()" >
+             <i class="material-icons">create</i>
+           </button>
+           <button md-button (click)="deleteData(row.id)" >
+             <i class="material-icons">delete</i>
+           </button>
+         </template>
+       </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+<div class="popup" *ngIf="isShownEditPopup">
+  <md-input-container *ngFor="let tableHeader of dataProps let i = index">
+    <input md-input placeholder="{{ tableHeader }}" [(ngModel)]="newDataValues[i+1]">
+  </md-input-container>
+  <button md-button (click)="updateData(newDataValues)" >
+    <i class="material-icons">done</i>
+ </button>
+ <i class="material-icons popup__button--close" (click)="toggleEditPopup()">close</i>
+</div>
