@@ -10,13 +10,6 @@ import { WorkerService } from '../worker.service';
 export class WorkersListComponent implements OnInit {
 
   workers: Worker[];
-  columns: any[] = [
-    { name: 'Name' },
-    { name: 'Surname' },
-    { name: 'Patronymic' }
-  ];
-  isShownEditPopup: boolean;
-
 
   constructor(private workerService: WorkerService) {
    }
