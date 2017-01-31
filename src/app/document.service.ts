@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { CrudService } from './crud.service';
-import { Http} from '@angular/http';
+import { Http } from '@angular/http';
 
 @Injectable()
-export class WorkerService extends CrudService {
+export class DocumentService extends CrudService {
 
   constructor(http: Http) {
       super(http);
       this.init();
    }
 
-   init(){
-     this.dataURL = '/workers';
+   init() {
+     this.dataURL = '/documents';
      super.init();
    }
+
 }

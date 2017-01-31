@@ -10,43 +10,41 @@ import { WorkerService } from '../worker.service';
 export class WorkersListComponent implements OnInit {
 
   workers: Worker[];
-  columns: any[] = [
-    { name: 'Name' },
-    { name: 'Surname' },
-    { name: 'Patronymic' }
-  ];
-  isShownEditPopup: boolean;
-  editableWorkerId: number;
-  temp: any[];
 
   constructor(private workerService: WorkerService) {
-    this.workerService.getWorkers()
-                     .subscribe( workers => {
-                       this.temp = [...workers];
-                       this.workers = workers;
-                     } );
    }
 
   ngOnInit() {
+    this.workerService.getData()
+                     .subscribe( workers => {
+                       this.workers = [];
+                       for (let i = 0; i < workers.length; i++) {
+                          this.workers[i] = new Worker();
+                          this.workers[i].id = workers[i].id;
+                          this.workers[i].name = workers[i].name;
+                          this.workers[i].surname = workers[i].surname;
+                          this.workers[i].patronymic = workers[i].patronymic;
+                       }
+                     } );
   }
 
-  saveWorker(name: String, surname: String, patronymic: String) {
+  saveWorker(workerData) {
     let worker: Worker = {
-      name: name,
-      surname: surname,
-      patronymic: patronymic
-    }
+      name: workerData[0],
+      surname: workerData[1],
+      patronymic: workerData[2]
+    };
 
 
-    this.workerService.saveWorker(worker)
-      .subscribe(response => {
+    this.workerService.save(worker)
+      .subscribe(() => {
         this.workers.push(worker);
       });
   }
 
   deleteWorker(id) {
-    this.workerService.deleteWorker(id)
-      .subscribe(response => {
+    this.workerService.delete(id)
+      .subscribe(() => {
         for(let i = 0; i < this.workers.length; i++) {
           if (this.workers[i].id === id) {
             this.workers.splice(i, 1);
@@ -55,25 +53,16 @@ export class WorkersListComponent implements OnInit {
     });
   }
 
-  initEditableWorker(id) {
-    this.editableWorkerId = id;
-    this.toggleEditPopup();
-  }
-
-  toggleEditPopup() {
-    this.isShownEditPopup = !this.isShownEditPopup;
-  }
-
-  updateWorker(name: string, surname: string, patronymic: string) {
+  updateWorker(data) {
     let worker: Worker = {
-      id: this.editableWorkerId,
-      name: name,
-      surname: surname,
-      patronymic: patronymic
-    }
+      id: data[0],
+      name: data[1],
+      surname: data[2],
+      patronymic: data[3]
+    };
 
-    this.workerService.updateWorker(worker)
-      .subscribe(response => {
+    this.workerService.update(worker)
+      .subscribe(() => {
         for(let i = 0; i < this.workers.length; i++) {
           if(worker.id === this.workers[i].id) {
             this.workers[i].name = worker.name;
@@ -82,20 +71,7 @@ export class WorkersListComponent implements OnInit {
           }
         }
       })
-
-    this.toggleEditPopup();
-    console.log(worker)
   }
 
-  updateFilter(event) {
-      let val = event.target.value.toLowerCase();
 
-      // filter our data
-      let temp = this.temp.filter(function(d) {
-        return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-      });
-
-      // update the rows
-      this.workers = temp;
-    }
 }

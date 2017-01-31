@@ -1,0 +1,5 @@
+<app-table-list [tableData]="clients"
+                (tableDataSaved)="saveClient($event)"
+                (tableDataUpdated)="updateClient($event)"
+                (tableDataDeleted)="deleteClient($event)"
+                (tableDataChanged)="clients = $event" ></app-table-list>
