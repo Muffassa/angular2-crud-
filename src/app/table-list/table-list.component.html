@@ -1,6 +1,6 @@
 <div class="dataInput" *ngFor="let tableHeader of dataProps let i = index">
   <md-input-container >
-    <input md-input placeholder="{{ tableHeader }}" [(ngModel)]="dataPropsValues[i]">
+    <input  placeholder="{{ tableHeader }}" md-input [(ngModel)]="dataPropsValues[i]">
   </md-input-container>
 </div>
 
@@ -33,20 +33,22 @@
     [columnMode]="'force'"
     [headerHeight]="50"
     [footerHeight]="50"
-    [rowHeight]="50">
+    [rowHeight]="auto">
       <ngx-datatable-column *ngFor="let tableHeader of dataProps" name="{{ tableHeader }}">
          <template let-value="value" ngx-datatable-cell-template>
            {{ value }}
          </template>
        </ngx-datatable-column>
        <ngx-datatable-column>
-         <template let-row="row" ngx-datatable-cell-template>
-           <button md-button (click)="newDataValues[0] = row.id; toggleEditPopup()" >
+         <template  let-row="row" ngx-datatable-cell-template>
+           <div class="column--buttons">
+            <button md-button (click)="newDataValues[0] = row.id; toggleEditPopup()" >
              <i class="material-icons">create</i>
            </button>
            <button md-button (click)="deleteData(row.id)" >
              <i class="material-icons">delete</i>
            </button>
+           </div>
          </template>
        </ngx-datatable-column>
   </ngx-datatable>

@@ -16,7 +16,15 @@ export class ClientsComponent implements OnInit {
   ngOnInit() {
     this.clientService.getData()
                      .subscribe( clients => {
-                       this.clients = clients;
+                        this.clients = []
+                       for (let i = 0; i < clients.length; i++) {
+                           this.clients[i] = new Client();
+                           this.clients[i].id = clients[i].id;
+                           this.clients[i].name = clients[i].name;
+                           this.clients[i].surname = clients[i].surname;
+                           this.clients[i].patronymic = clients[i].patronymic;
+                           this.clients[i].address = clients[i].address;
+                       }
                      } );
   }
 
@@ -51,7 +59,7 @@ export class ClientsComponent implements OnInit {
       id: data[0],
       name: data[1],
       surname: data[2],
-      patronymic: data[3]
+      patronymic: data[3],
       address: data[4]
     }
 

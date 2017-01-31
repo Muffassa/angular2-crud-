@@ -10,7 +10,6 @@ export class CrudService {
   private URL: string;
 
   constructor(private http: Http) {
-    this.init();
    }
 
    init() {

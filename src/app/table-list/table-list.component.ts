@@ -27,8 +27,6 @@ export class TableListComponent implements OnChanges {
       let dataProps = Object.keys(this.tableData[0]);
       // For delete id and created date and changed date from headers
       dataProps.shift();
-      dataProps.pop();
-      dataProps.pop();
       this.dataProps = dataProps;
     }
   }
@@ -56,7 +54,7 @@ export class TableListComponent implements OnChanges {
 
       // filter our data
       let temp = this.temp.filter(function(d) {
-        return eval('d.'+ filter.toLowerCase() + '.indexOf(val) !== -1 || !val');
+        return eval('d.'+ filter + '.indexOf(val) !== -1 || !val');
       });
 
       // update the rows
